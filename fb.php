@@ -1,11 +1,11 @@
 <?php
- $fh=fopen('./msg.txt','a');//´ò¿ªÎÄµµ
+ $fh=fopen('./msg.txt','a');//æ‰“å¼€æ–‡æ¡£
  $str=$_POST['username'].":".$_POST['comments']."<br> \r\n";
- $str=preg_replace('/script/','*',$str); 
- fwrite($fh,$str);               //Ð´ÁôÑÔ
+// $str=preg_replace('/script/','*',$str); //æ›¿æ¢å…³é”®è¯
+ fwrite($fh,$str);               //å†™ç•™è¨€
  fclose($fh);
 
- //echo 'ÇëË¢ÐÂ²é¿´ÁôÑÔ';
+ //echo 'è¯·åˆ·æ–°æŸ¥çœ‹ç•™è¨€';
 header("location:http://localhost/messb/messagepro.html");
 
 ?>
