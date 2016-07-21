@@ -1,0 +1,9 @@
+﻿test: 终于留言成功了！！！！<br> 
+ 
+XSS测试: <*>alert('XSS攻击')</*><br> 
+
+:<br> 
+:<br> 
+ss: ssss<br> 
+sss: sssss<br> 
+Test: <*>alert(/sss/)</*><br> 

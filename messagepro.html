@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>留言板升级版</title>
+<style>
+	#main{
+		width:1000px;  /* * 960-1002之间* */
+		height:auto;
+		margin:auto;
+		overflow:hiddden;
+	}
+	#head{
+		background:gray;
+		height:30px;
+		text-align:center;
+		margin:5px;
+		}
+</style>
+
+<script>
+var message=" 欢迎来到留言板主页，请您留言 ";
+var position=150;
+var delay = 10;
+var statusobj = new statusMessageObject()
+function statusMessageObject(p,d)
+{
+	this.msg=message;
+	this.out=" ";
+	this.pos=position;
+	this.delay=delay;
+	this.i=0;
+	this.reset=clearMessage;
+}
+function clearMessage()
+{
+	this.pos=POSITION;
+}
+function brush()
+{
+	for(statusobj.i=0;statusobj.i<statusobj.pos;statusobj.i++)
+	{
+		statusobj.out+=" ";
+	}
+	if (statusobj.pos>=0)
+		statusobj.out+=statusobj.msg;
+	else
+	statusobj.out=statusobj.msg.substring(-statusobj.pos,statusobj.msg.length);
+	window.status=statusobj.out;
+	status.out="";
+	statusobj.pos--;
+	if (statusobj.pos < -(statusobj.msg.length))
+	{
+		statusobj.reset();
+	}
+	setTimeout('brush()',statusobj.delay)
+}
+
+function outtext(space,position)
+{
+	var msg=statusobj.msg;
+	var out="";
+	for (var i=0;i<position;i++)
+	{
+		out+=msg.charAt(i);
+	}
+	for(i=1;i<space;i++)
+	{
+		out+=" ";
+	}
+	out+=msg.charAt(position);
+	window.status=out;
+	if(space<=1)
+	{
+		position++;
+		if(msg.charAt(position)==' '){
+			position++;}
+			space=100-position;
+	}
+	else if(space>3)
+	{
+		space *=.75;
+	}
+	else
+	{
+		space--;
+	}
+	if(position!=msg.length)
+	{
+		var cmd="outtext("+space+","+position+")";
+		scrollID=window.setTimeout(cmd,statusobj.delay);
+	}
+	else
+	{
+		window.status="";
+		space=0;
+		position=0;
+		cmd="outtext("+space+","+position+")";
+		scrollID=window.setTimeout(cmd,statusobj.delay);
+		return false;
+	}
+	return true;
+}
+outtext(100,0);
+
+</script>
+</head>
+
+<body>
+	<div id="main">
+    	<div id="head"><h2>留言板</h2></div>
+        <form action="fb.php" method="post">
+        	<p>
+            用户名 <input type="text" name="username"/>（*必填）&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;联系方式 <input type="text" name="number"/>
+            </p>   	 
+        	<p>
+            欢迎留言<br/><textarea name="comments" rows="15" cols="110"> </textarea> 
+            </p> 
+       		<p>
+            <input type="submit"  value="留言" onclick="javascript:alert('留言成功，刷新查看留言！')"/>
+            <input type="reset" value="重写留言" />
+            </p> 
+		</form>  
+	</div>	    
+</body>
+</html>

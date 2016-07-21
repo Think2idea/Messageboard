@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<!-- <meta http-equiv="refresh" content="3">  自动刷新页面 -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Page-Enter" content="blendTrans(Duration=3)"><!-- 页面被载入和调出的特效 -->
+<title>留言成功</title>
+<script>
+ var n=0;
+  function title()
+  {
+  	n++;
+    if(n==3){n=1}
+    if(n==2){document.title='☆欢迎留言☆'}
+    if(n==1){document.title='★欢迎留言★'}
+    setTimeout("title()",1000)
+  }
+  
+  title();
+
+var message=" 欢迎来到留言板主页，请您留言 ";
+var position=150;
+var delay = 10;
+var statusobj = new statusMessageObject()
+function statusMessageObject(p,d)
+{
+	this.msg=message;
+	this.out=" ";
+	this.pos=position;
+	this.delay=delay;
+	this.i=0;
+	this.reset=clearMessage;
+}
+function clearMessage()
+{
+	this.pos=POSITION;
+}
+function brush()
+{
+	for(statusobj.i=0;statusobj.i<statusobj.pos;statusobj.i++)
+	{
+		statusobj.out+=" ";
+	}
+	if (statusobj.pos>=0)
+		statusobj.out+=statusobj.msg;
+	else
+	statusobj.out=statusobj.msg.substring(-statusobj.pos,statusobj.msg.length);
+	window.status=statusobj.out;
+	status.out="";
+	statusobj.pos--;
+	if (statusobj.pos < -(statusobj.msg.length))
+	{
+		statusobj.reset();
+	}
+	setTimeout('brush()',statusobj.delay)
+}
+
+function outtext(space,position)
+{
+	var msg=statusobj.msg;
+	var out="";
+	for (var i=0;i<position;i++)
+	{
+		out+=msg.charAt(i);
+	}
+	for(i=1;i<space;i++)
+	{
+		out+=" ";
+	}
+	out+=msg.charAt(position);
+	window.status=out;
+	if(space<=1)
+	{
+		position++;
+		if(msg.charAt(position)==' '){
+			position++;}
+			space=100-position;
+	}
+	else if(space>3)
+	{
+		space *=.75;
+	}
+	else
+	{
+		space--;
+	}
+	if(position!=msg.length)
+	{
+		var cmd="outtext("+space+","+position+")";
+		scrollID=window.setTimeout(cmd,statusobj.delay);
+	}
+	else
+	{
+		window.status="";
+		space=0;
+		position=0;
+		cmd="outtext("+space+","+position+")";
+		scrollID=window.setTimeout(cmd,statusobj.delay);
+		return false;
+	}
+	return true;
+}
+outtext(100,0);
+
+</script>
+
+</head>
+	<div id="container">
+	<frameset rows="76,24">
+		<frame src="messagepro.html"></frame>
+		<frame src="msg.php"></frame>
+	</frameset>
+	</div>
+</html>
