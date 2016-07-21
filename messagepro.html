@@ -103,6 +103,26 @@ function outtext(space,position)
 }
 outtext(100,0);
 
+//过滤函数，自定义敏感字符
+function  check(f)
+{
+	var str = f.comments.value;
+	var c = new Array('script','<','>','input','img');
+	for(var i=0;i<c.length;i++)
+	{
+		if(str.indexOf(c[i])!=-1){
+			alert('输入存在敏感字符'+c[i]);
+			return false;
+		}
+
+		else {
+		alert('留言成功，刷新查看留言！');
+	    return true;
+		}
+
+	}
+}
+
 </script>
 </head>
 
@@ -117,7 +137,8 @@ outtext(100,0);
             欢迎留言<br/><textarea name="comments" rows="15" cols="110"> </textarea> 
             </p> 
        		<p>
-            <input type="submit"  value="留言" onclick="javascript:alert('留言成功，刷新查看留言！')"/>
+            <!--<input type="submit"  value="留言" onclick="javascript:alert('留言成功，刷新查看留言！')"/>-->
+            <input type="submit"  value="留言" onclick="return check(form)"/>//必须加上return,否则拦截了也会留言成功。
             <input type="reset" value="重写留言" />
             </p> 
 		</form>  
